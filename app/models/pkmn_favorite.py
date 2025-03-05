@@ -7,10 +7,10 @@ class PokemonFavorites(SuperClass):
         super().__init__('pokemon_favorites')
 
     def create(self, data):
-        raise NotImplementedError('Los pokemones no se pueden crear')
-    
-    def delete(self, object_id):
-        raise NotImplementedError('Los pokemones no se pueden eliminar')
+        data["user_id"] = ObjectId(data["user_id"])
+        data["pokemon_id"] = ObjectId(data["pokemon_id"])
+        datum = self.collection.insert_one(data)
+        return str(datum.inserted_id)
     
     def update(self, object_id, data):
         raise NotImplementedError('Los pokemones no se pueden actualizar')
@@ -20,4 +20,8 @@ class PokemonFavorites(SuperClass):
 
     def find_all(self, user_id):
         data = self.collection.find({"user_id": ObjectId(user_id)})
+        for datum in data:
+            datum["user_id"]=str(datum["user_id"])
+            datum["pokemon_id"]=str(datum["pokemon_id"])
+            datum["_id"]=str(datum["_id"])
         return data

@@ -1,7 +1,7 @@
 from app import mongo
-from app.models.superClass import Super_Class
+from app.models.superClass import SuperClass
 
-class Pokemon(Super_Class):
+class Pokemon(SuperClass):
     def __init__(self):
         super().__init__('pokemons')
 
