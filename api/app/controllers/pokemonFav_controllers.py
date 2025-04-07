@@ -29,9 +29,9 @@ def create():
 #Elimina
 @bp.route("/delete", methods=["DELETE"])
 @jwt_required()
-def delete(id):
-    pokefav_model.delete(ObjectId(id))
-    return RM.success("Pokemon eleiminado con exito")
+def delete():
+    pokefav_model.delete(ObjectId())
+    return RM.success("Pokemon eliminado con exito")
 #Get All
 @bp.route("/", methods=["GET"])
 @jwt_required()
